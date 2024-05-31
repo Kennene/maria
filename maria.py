@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from dotenv import load_dotenv                  # Ładowanie zmiennych środowiskowych z pliku .env
+import os                                       # Biblioteka suplementująca load_dotenv
 import pygame                                   # Odtwarzanie plików dźwiękowych .wav
 import threading                                # Wątkowanie odgłosów dźwiękowych
 import speech_recognition                       # Przekształcanie mowy na tekst
@@ -51,7 +51,7 @@ def play_wav_async(path):
 
 
 def chatGPT(prompt):
-    context = "Your name is Maria. You are a virtual turbo-smart voice assistant. Provide concise and informative responses while remaining human. Provide response only in the English language. Keep the response simple and short."
+    context = os.getenv("CONTEXT")
     response = OpenAI().chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
